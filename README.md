@@ -58,4 +58,11 @@ Pending List:  [
   VulnerabilityScript { scriptId: 4, dependencies: [ 3, 2 ] }
 ]
 
+Run
+------------------------------------
+1. Login to GITHUB
+2. Open the repo in Codespace
+3. In terminal, Run the command 'node index.js'
+4. It will display the Results in terminal.
+5. Change the Script values in Index.js file and save it, Run the same command 'node index.js' to get output
 
