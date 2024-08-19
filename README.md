@@ -32,7 +32,7 @@ Test case 3 // Process 7 is removed from script 2 of Test case 2
 -------------------------------------
 Script ID	:	Dependendcies
 	1	:	[5]
-	2	:	[5,7]
+	2	:	[5]
 	3	:	[2]
 	4	:	[3,2]
 	5	:	[]
