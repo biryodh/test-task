@@ -22,7 +22,7 @@
                   <table class="table table-bordered table-hover" id="dynamic_field">
                     <tr>
                       <td><input type="text" name="script[]" placeholder="Enter Script ID" class="form-control name_list" id="script" /></td>
-                      <td><input type="text" name="dependencies[]" placeholder="Enter dependencies in []" class="form-control name_email" id="dependency"/></td>
+                      <td><input type="text" name="dependencies[]" placeholder="Enter dependencies (Comma seperation)" class="form-control name_email" id="dependency"/></td>
                       <td><button type="button" name="add" id="add" class="btn btn-primary">Add More</button></td>  
                     </tr>
                   </table>
@@ -56,7 +56,7 @@
       //addamount += 700;
       //console.log('amount: ' + addamount);
     i++;
-       $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="script[]" id="script" placeholder="Enter Script ID" class="form-control name_list"/></td><td><input type="text" name="dependencies[]" id="dependency" placeholder="Enter dependencies in []" class="form-control name_email"/></td>	<td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+       $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="script[]" id="script" placeholder="Enter Script ID" class="form-control name_list"/></td><td><input type="text" name="dependencies[]" id="dependency" placeholder="Enter dependencies (Comma seperation)" class="form-control name_email"/></td>	<td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
      });
  
    $(document).on('click', '.btn_remove', function(){  
