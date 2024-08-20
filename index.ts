@@ -18,59 +18,65 @@ class VulnerabilityScript {
 }
 
 // Creating processess
-let vulnerabilityScripts:VulnerabilityScript[] = [
-    new VulnerabilityScript(1,[2,5]),
-    new VulnerabilityScript(2,[5]),
-    new VulnerabilityScript(3,[]),
-    new VulnerabilityScript(4,[1]),
-    new VulnerabilityScript(5,[3]),
-];
+// let vulnerabilityScripts:VulnerabilityScript[] = [
+//     new VulnerabilityScript(1,[2]),
+//     new VulnerabilityScript(2,[1,3]),
+//     new VulnerabilityScript(3,[4]),
+//     new VulnerabilityScript(4,[3,2]),
+//     new VulnerabilityScript(5,[]),
+// ];
 
-let vScriptExecuted:number[]=[];
+
 
 //Remove from List after execution 
-function filterArray(Obj:VulnerabilityScript){
+function filterArray(vulnerabilityScripts:VulnerabilityScript[], Obj:VulnerabilityScript){
     let filteredArray:VulnerabilityScript[] = 
     vulnerabilityScripts.filter((script:VulnerabilityScript)=>script.getScriptId()!=Obj.getScriptId());
     return filteredArray;
 }
 
 function executeNonDependentScripts(Scripts:VulnerabilityScript[]){
+    let vScriptExecuted:number[]=[];
     for( let element of Scripts){
         if(element.getDependencies().length==0){
             vScriptExecuted.push(element.getScriptId());
-            vulnerabilityScripts = filterArray(element);
+            Scripts = filterArray(Scripts,element);
         }
     }
+    return vScriptExecuted;
 } 
 
 // Execute First process 
-executeNonDependentScripts(vulnerabilityScripts);
+//executeNonDependentScripts(vulnerabilityScripts);
 
 // Execute pending processes
-let processCount = vulnerabilityScripts.length;
 
-while(processCount!=0){
-    for(let script of vulnerabilityScripts){
-        let executedCount:number = 0;
-        for(let item of script.getDependencies()){
-                const index = vScriptExecuted.indexOf(item);
-                if(index !== -1){
-                    executedCount++
+
+function executeProcess(vulnerabilityScripts:VulnerabilityScript[],vScriptExecuted:Number[]){
+        let processCount = vulnerabilityScripts.length;
+        while(processCount!=0){
+            for(let script of vulnerabilityScripts){
+                let executedCount:number = 0;
+                for(let item of script.getDependencies()){
+                        const index = vScriptExecuted.indexOf(item);
+                        if(index !== -1){
+                            executedCount++
+                        }
                 }
+                if(executedCount===script.getDependencies().length){
+                    vScriptExecuted.push(script.getScriptId());
+                    vulnerabilityScripts = filterArray(vulnerabilityScripts,script);
+                }
+            }
+        processCount--;
         }
-        if(executedCount===script.getDependencies().length){
-            vScriptExecuted.push(script.getScriptId());
-            vulnerabilityScripts = filterArray(script);
-        }
-    }
-processCount--;
+        return vScriptExecuted;
 }
 // displaying Ececuted scripts
-console.log("Executed Order:",vScriptExecuted )
+//console.log("Executed Order:",vScriptExecuted )
 
 // displaying Unececuted scripts
-if(vulnerabilityScripts.length!=0){
-    console.log("Either circular dependency Or some scripts are missing" )
-    console.log('Pending List: ',vulnerabilityScripts);
-}
+// if(vulnerabilityScripts.length!=0){
+//     console.log("Either circular dependency Or some scripts are missing" )
+//     console.log('Pending List: ',vulnerabilityScripts);
+// }
